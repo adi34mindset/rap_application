@@ -1,0 +1,9 @@
+<c:FragmentDefinition id="delFragment" xmlns="sap.m" xmlns:c="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+    <Dialog id="delDialog" title="Warning">
+        <Label id="lab1" class="sapUiSmallMargin" textAlign="Center" text = "Delete this item ?"/>
+        <buttons>
+            <Button id="bu2" text="Yes" press="onDeleteField" type="Accept" />
+            <Button id="bu1" text="No" press="closeDelete" type="Reject" />
+        </buttons>
+    </Dialog>
+</c:FragmentDefinition>

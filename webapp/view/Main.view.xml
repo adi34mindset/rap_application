@@ -1,0 +1,197 @@
+<mvc:View controllerName="com.mindset.ad.rapapp.controller.Main"
+     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:u="sap.ui.unified"
+    xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:fun="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants">
+   <fun:DynamicPage id="page" headerExpanded="{/headerExpanded}">
+        <fun:title>
+				<fun:DynamicPageTitle>
+					<fun:heading>
+						<svm:SmartVariantManagement id="svm" showExecuteOnSelection="true" />
+					</fun:heading>
+					<fun:expandedContent>
+						<Label id="expandedLabel" text="No filters active" />
+					</fun:expandedContent>
+					<fun:snappedContent>
+						<Label id="snappedLabel" text="No filters active" />
+					</fun:snappedContent>
+				</fun:DynamicPageTitle>
+		</fun:title>
+        <fun:header>
+            <fun:DynamicPageHeader>
+                <fun:content>
+                    <fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onGlobalSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem name="Name" label="Customer Name" groupName="Group1" visibleInFilterBar="true">
+                            <fb:control>
+                                <MultiComboBox
+                                    name="Name"
+                                    selectionChange=".onSelectionChange"
+                                    items="{
+                                    path: 'mainModel>/SalesOrder',
+                                    sorter: { path: 'mainModel>CustomerName' },
+                                    templateShareable: true
+                                    }"
+                                >
+                                <c:Item key="{mainModel>SoNumber}" text="{mainModel>CustomerName}"/>
+                                </MultiComboBox>
+                            </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </fun:content>
+            </fun:DynamicPageHeader>
+        </fun:header>
+        <fun:content>
+            <t:Table
+                rows="{mainModel>/SalesOrder}"
+                id="table0"
+                selectionMode="Single"
+                rowSelectionChange=".onSelectionChange"
+            >
+                <t:extension>
+                    <OverflowToolbar>
+                        <content>
+                            <ToolbarSpacer />
+                            <SearchField
+                                id="searchField"
+                                width="20%"
+                                placeholder="search"
+                                search=".onSearch"
+                            />
+                            <Button
+                                icon="sap-icon://download"
+                                visible="true"
+                                press="onDataExport"
+                            >
+                                <layoutData>
+                                    <OverflowToolbarLayoutData
+                                        priority="NeverOverflow"
+                                    />
+                                </layoutData>
+                            </Button>
+                            <Button
+                                id="createButton"
+                                icon="sap-icon://add"
+                                tooltip="Create"
+                                visible="true"
+                                press="onPressCreate"
+                            >
+                                <layoutData>
+                                    <OverflowToolbarLayoutData
+                                        priority="NeverOverflow"
+                                    />
+                                </layoutData>
+                            </Button>
+                            <Button
+                                id="deleteButton"
+                                icon="sap-icon://delete"
+                                tooltip="Delete"
+                                visible="true"
+                                press="onPressDelete"
+                            >
+                                <layoutData>
+                                    <OverflowToolbarLayoutData
+                                        priority="NeverOverflow"
+                                    />
+                                </layoutData>
+                            </Button>
+
+                            <!-- <Button
+                                id="saveButton"
+                                text="Save"
+                                type="Emphasized"
+                                visible="false"
+                                enabled="true"
+                                press="onSave"
+                            /> -->
+                            <Button
+                                id="editModeButton"
+                                visible="true"
+                                icon="sap-icon://edit"
+                                tooltip="Edit"
+                                press="onEditMode"
+                            >
+                                <layoutData>
+                                    <OverflowToolbarLayoutData
+                                        priority="NeverOverflow"
+                                    />
+                                </layoutData>
+                            </Button>
+                        </content>
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column
+                        id="soNum"
+                        width="auto"
+                        sortProperty="SoNumber"
+                    >
+                        <Label text="So Number" />
+                        <t:template>
+                            <Text
+                                text="{mainModel>SoNumber}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        id="cusName"
+                        width="auto"
+                        filterProperty="CustomerName"
+                    >
+                        <Label text="Customer Name" />
+                        <t:template>
+                            <Text
+                                text="{mainModel>CustomerName}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        id="cusNum"
+                        width="auto"
+                    >
+                        <Label text="Customer Number" />
+                        <t:template>
+                            <Text
+                                text="{mainModel>CustomerNumber}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        id="ordDate"
+                        width="auto"
+                    >
+                        <Label text="Order Date" />
+                        <t:template>
+                            <Text
+                                text="{path: 'mainModel>OrderDate', formatter: '.formatter.displayDateFormat'}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        id="inqNum"
+                        width="auto"
+                    >
+                        <Label text="Inquiry Number" />
+                        <t:template>
+                            <Text
+                                text="{mainModel>InquiryNumber}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </fun:content>
+    </fun:DynamicPage>
+</mvc:View>

@@ -1,0 +1,28 @@
+<c:FragmentDefinition id="idFragment" xmlns="sap.m" xmlns:c="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+    <Dialog id="myDialog" title="Add Data">
+    <VBox id="vb" class="sapUiSmallMargin">
+       	<l:VerticalLayout id="addData" class="sapUiContentPadding" width="100%">
+            <Label id="l1" text="So Number"/>
+            <Input id="i1" width="100%"/>
+            <Label id="l2" text="Customer Name"/>
+            <Input id="i2" width="100%"/>
+            <Label id="l3" text="Customer Number"/>
+            <Input id="i3" width="100%"/>
+            <Label id="l4" text="Order Date"/>
+            <!-- <Input id="i4" width="100%"/> -->
+            <DatePicker
+					id="i4"
+					placeholder="Enter Date"
+					class="sapUiSmallMarginBottom"/>
+            <Label id="l5" text="Inquiry Number"/>
+            <Input id="i5" width="100%"/>
+        </l:VerticalLayout>
+    </VBox>
+    <beginButton>
+            <Button id="bb1" text="Create" press=".onCreateMat" type="Emphasized" />
+    </beginButton>
+    <endButton>
+            <Button id="bb2" text="Cancel" press=".onCloseCreate" />
+    </endButton>
+    </Dialog>
+</c:FragmentDefinition>
